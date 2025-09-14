@@ -47,7 +47,7 @@ Admins can manage products, customers, and orders easily.
 6. Start Apache & MySQL from XAMPP Control Panel.  
 7. Open in browser:  
    ```
-   http://localhost/grocery-website/
+   https://rishabh95s.github.io/E-Commerce-Grocery-Project/
    ```
 
 ---
