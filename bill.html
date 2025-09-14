@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Billing Summary</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f0f2f5;
+            padding: 20px;
+        }
+
+        .bill-container {
+            max-width: 800px;
+            margin: auto;
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px #ccc;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th,
+        td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        .total {
+            text-align: right;
+            font-size: 20px;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+
+        .delivery-btn {
+            display: block;
+            margin-top: 30px;
+            padding: 12px 24px;
+            background: #4CAF50;
+            color: white;
+            border: none;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            float: right;
+        }
+
+        .delivery-btn:hover {
+            background-color: #45a049;
+        }
+
+        .no-items {
+            text-align: center;
+            padding: 30px;
+            color: #777;
+            font-size: 18px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="bill-container">
+        <h2>Your Bill</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>S.No</th>
+                    <th>Item</th>
+                    <th>Quantity</th>
+                    <th>Unit Price</th>
+                    <th>Total</th>
+                </tr>
+            </thead>
+            <tbody id="bill-table">
+                <!-- JS adds rows here -->
+            </tbody>
+        </table>
+        <h3 class="total">Total Amount: <span id="total-price">Rs. 0</span></h3>
+        <button class="delivery-btn" onclick="window.location.href='./Details For Checkout HTML.php'">Add Delivery Details</button>
+    </div>
+
+    <script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const cart = JSON.parse(localStorage.getItem("cart")) || [];
+        const billTable = document.getElementById("bill-table");
+        const totalElement = document.getElementById("total-price");
+        let total = 0;
+
+        cart.forEach((item, index) => {
+            let priceValue = typeof item.price === "string"
+                ? parseInt(item.price.replace(/[^0-9]/g, ''))
+                : item.price;
+
+            let subtotal = priceValue * item.quantity;
+            total += subtotal;
+
+            const row = document.createElement("tr");
+            row.innerHTML = `
+                <td>${index + 1}</td>
+                <td>${item.name}</td>
+                <td>${item.quantity}</td>
+                <td>Rs. ${priceValue}</td>
+                <td>Rs. ${subtotal}</td>
+            `;
+            billTable.appendChild(row);
+        });
+
+        // Update total and save to localStorage
+        totalElement.textContent = `Rs. ${total}`;
+        localStorage.setItem("payableAmount", `${total}`); // Store only numeric value
+    });
+</script>
+
+
+
+</body>
+
+</html>

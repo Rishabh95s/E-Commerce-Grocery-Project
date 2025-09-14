@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Debit Card Payment</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f2f2f2;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .payment-container {
+      background: #fff;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      width: 350px;
+    }
+    .payment-container h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .input-group {
+      margin-bottom: 15px;
+    }
+    .input-group label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+    }
+    .input-group input, .input-group select {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 16px;
+    }
+    .pay-btn {
+      width: 100%;
+      padding: 12px;
+      background: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 18px;
+      cursor: pointer;
+    }
+    .pay-btn:hover {
+      background: #45a049;
+    }
+  </style>
+</head>
+<body>
+
+<div class="payment-container">
+  <h2>Debit Card Payment</h2>
+  <form action="payment_success.php" method="POST" onsubmit="return handleFormSubmission()">
+    <div class="input-group">
+      <label for="cardholder">Cardholder Name</label>
+      <input type="text" id="cardholder" name="cardholder" required>
+    </div>
+
+    <div class="input-group">
+      <label for="cardnumber">Card Number</label>
+      <input type="text" id="cardnumber" name="cardnumber" maxlength="16" required oninput="validateInput(this)">
+      <small id="cardnumber-error" style="color: red; display: none;">Card number must be exactly 16 digits.</small>
+    </div>
+
+    <div class="input-group">
+      <label for="expiry">Expiry Date (MM/YY)</label>
+      <select id="expiry-month" name="expiry-month" required>
+        <option value="" disabled selected>Month</option>
+        <option value="01">January</option>
+        <option value="02">February</option>
+        <option value="03">March</option>
+        <option value="04">April</option>
+        <option value="05">May</option>
+        <option value="06">June</option>
+        <option value="07">July</option>
+        <option value="08">August</option>
+        <option value="09">September</option>
+        <option value="10">October</option>
+        <option value="11">November</option>
+        <option value="12">December</option>
+      </select>
+      <select id="expiry-year" name="expiry-year" required>
+        <option value="" disabled selected>Year</option>
+        <option value="2025">2025</option>
+        <option value="2026">2026</option>
+        <option value="2027">2027</option>
+        <option value="2023">2028</option>
+        <option value="2024">2029</option>
+        <option value="2023">2030</option>
+        <option value="2024">2031</option>
+      </select>
+    </div>
+
+    <div class="input-group">
+      <label for="cvv">CVV</label>
+      <input type="password" id="cvv" name="cvv" maxlength="3" required oninput="validateInput(this)">
+      <small id="cvv-error" style="color: red; display: none;">CVV must be of 3 digits.</small>
+    </div>
+
+    <button type="submit" class="pay-btn">Pay Now</button>
+  </form>
+</div>
+
+<script>
+  function validateInput(input) {
+    input.value = input.value.replace(/\D/g, ''); // Remove non-digit characters
+  }
+
+  function validateCardNumber() {
+    const cardNumberInput = document.getElementById('cardnumber');
+    const cardNumberError = document.getElementById('cardnumber-error');
+    const cardNumber = cardNumberInput.value;
+
+    if (cardNumber.length !== 16) {
+      cardNumberError.style.display = 'block';
+      return false;
+    }
+
+    cardNumberError.style.display = 'none';
+
+    const cvvInput = document.getElementById('cvv');
+    const cvvError = document.getElementById('cvv-error');
+    const cvv = cvvInput.value;
+
+    if (cvv.length !== 3) {
+      cvvError.style.display = 'block';
+      return false;
+    }
+
+    cvvError.style.display = 'none';
+    return true;
+  }
+
+  function handleFormSubmission() {
+    if (validateCardNumber()) {
+      alert('Payment submitted successfully!');
+      window.location.href = 'index.html';
+      return false; // Prevent default form submission
+    }
+    return false; // Prevent form submission if validation fails
+  }
+</script>
+
+</body>
+</html>

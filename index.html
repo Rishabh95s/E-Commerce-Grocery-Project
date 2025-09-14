@@ -1,0 +1,1672 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+        integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+
+    <style type="text/css">
+    </style>
+    <title>Grocery 24/7</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .navigation{
+    display: flex;
+    font-size: 20px;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    margin-right: 0px;
+    /* max-width: 1070px; */
+    width: 100%;
+    margin: auto;
+    /* margin-left: 90px; */
+    position: fixed; /* Make the navbar fixed */
+    top: 0; /* Align it to the top */
+    left: 0;
+    z-index: 1000; /* Ensure it stays above other elements */
+    background-color: #fff; /* Add a background color to avoid transparency issues */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Optional: Add a shadow for better visibility */
+}
+body {
+    padding-top: 70px; /* Add padding to prevent content overlap with the fixed navbar */
+}
+.menu{
+    display: flex;
+	align-items:left;
+    gap: 30px; /* Add gap between menu items */
+}
+.menu li a{
+    padding: 5px 5px;
+    margin: 0px 15px;
+    color: #3b3b3b;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    transition: all ease 0.3s;
+	
+}
+.logo{
+    font-size: 2.5rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    color: #202020;
+}
+/* .logo span{
+    color: #40aa54;
+} */
+.right-nav{
+    display: flex;
+    grid-template-columns: auto auto;
+    grid-gap: 25px;
+}
+.right-nav a{
+    width:40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    position: relative;
+}
+.right-nav .like{
+    background-color: #fff0ee;
+    color: #ff6c57;
+}
+.right-nav .cart{
+    background-color: #ecf7ee;
+    color: #4eb060;
+}
+.right-nav .user-profile{
+    background-color: #ecf7ee;
+    color: rgb(139, 195, 221);
+}
+.right-nav a span{
+    position: absolute;
+    top: -7px;
+    right: -7px;
+    width:20px;
+    height: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    color: #ffffff;
+    font-size: 0.6rem;
+    font-weight: 500;
+}
+.right-nav .like span{
+    background-color: #ff6c57;
+}
+.right-nav .cart span{
+    background-color: #4eb060;
+}
+.right-nav .user-profile span{
+    background-color: rgb(95, 183, 224);
+}
+@media(max-width:965px){
+    .navigation{
+        justify-content: space-between;
+        height: 65px;
+        padding: 35px 25px;
+    }
+    .logo{
+        font-size: 2rem;
+    }
+    .navigation .menu{
+        display: none;
+        flex-direction: column; /* Change to column for list view */
+        position: absolute;
+        top: 65px;
+        left: 0px;
+        z-index: 100;
+        background-color: #ffffff;
+        width: 100%;
+        padding: 0px;
+        margin: 0px;
+        border-bottom: 1px solid rgba(245,245,245);
+    }
+    .navigation .menu li{
+        width: 100%;
+        margin: 0px;
+        padding: 0px;
+    }
+    .navigation .menu li a{
+        width: 100%;
+        height: 40px;
+        display: flex;
+        align-items:center;
+        padding: 10px 10px;
+        margin: 0px;
+        border: 1px solid rgba(248,247,247,0.5);
+    }
+    .navigation .menu a {
+        width: 100%;
+        padding: 0px 0px;
+        text-align: left;
+        border-bottom: 1px solid rgba(248, 247, 247, 0.5);
+    }
+    .menu-icon{
+        display: block;
+    }
+    .navigation .menu-icon{
+        cursor: pointer;
+        float: right;
+        padding: 5px;
+        position: relative;
+        user-select: none;
+        z-index: 2;
+    }
+    .navigation .menu-icon .nav-icon{
+        background-color: #141414cc;
+        display: block;
+        height: 3px;
+        width: 25px;
+        position: relative;
+        transition: background 0.2s ease-out;
+    }
+    .navigation .menu-icon .nav-icon::before,
+    .navigation .menu-icon .nav-icon::after{
+        background-color: #141414cc;
+        content: '';
+        display: block;
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        transition: all ease-out 0.2s;
+    }
+    .navigation .menu-icon .nav-icon::before{
+        top: 7px;
+    }
+    .navigation .menu-icon .nav-icon::after{
+        top: -7px;
+    }
+    .navigation .menu-btn:checked ~ .menu-icon .nav-icon::before{
+        transform: rotate(-45deg);
+        top: 0px;
+    }
+    .navigation .menu-btn:checked ~ .menu-icon .nav-icon::after{
+        transform: rotate(45deg);
+        top: 0px;
+    }
+    .navigation .menu-icon .nav-icon{
+        background-color: transparent;
+    } 
+    .navigation .menu-btn:checked ~ .menu{
+        display: flex; /* Show menu as a list */
+    }   
+ 
+    #search-banner{
+        height: 400px;
+        background-size: 500px;
+    }
+    .bg-2{
+        width: 100px;
+        height: 100px;
+        top: -50px;
+    }
+    .category-container{
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    .category-box{
+        margin: 10px;
+    }
+    .product-container{
+        grid-template-columns: 1fr 1fr;
+    }
+    .client-box-container{
+        grid-template-columns: 1fr 1fr;
+    }
+    .partner-heading{
+        justify-content: center;
+    }
+    .logo-container{
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    .logo-container img{
+        margin: 10px;
+    }
+    #download-app{
+        flex-direction: column;
+        height: 100%;
+        background-color: transparent;
+        margin-top: 0px;
+        width: 90%;
+        max-width: 100%;
+    }
+    .app-img{
+        height: 450px;
+        width: 220px;
+    }
+    .download-app-text{
+        max-width: 100%;
+        background-color: #ecf7ee;
+        padding: 20px;
+        border-radius: 20px;
+        margin-top: 20px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
+    .footer-container{
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+    }
+    .footer-links{
+        text-align: center;
+    }
+}
+        /* Fix for whitespace on the right and responsiveness */
+        html, body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            overflow-x: hidden;
+            /* Prevent horizontal scrolling */
+        }
+
+        /* Style for product images */
+        .product-image {
+            width: 100%;
+            /* Makes the image responsive */
+            max-width: 300px;
+            /* Set a maximum width to avoid large images */
+            height: auto;
+            /* Maintain the aspect ratio of the image */
+            object-fit: auto;
+            /* Ensures the image fits well within the container without distortion */
+        }
+
+        .product-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .product-item {
+            border: 1px solid #ccc;
+            padding: 20px;
+            width: 200px;
+            /* Fixed size for the product card */
+            text-align: center;
+        }
+
+        /* Style for forms and buttons */
+        form input {
+            margin-bottom: 10px;
+            padding: 8px;
+            width: 200px;
+        }
+
+        form button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        form button:hover {
+            background-color: #45a049;
+        }
+
+        /* Center Payment Method Section */
+        #paymentMethodsSection {
+            margin-top: 20px;
+        }
+        .navbar {
+                display:flex;
+                align-items: center;
+                justify-content:baseline;
+                background-color: #d8fce5;
+                padding: 10px;
+                position: sticky;
+                top: 0;
+                z-index: 1000;
+            }
+    
+            /* .navbar .logo {
+                font-size: 25px;
+                font-weight: bold;
+                background: linear-gradient(240deg, green,orange);
+                -webkit-background-clip: text;
+                background-clip: text;
+                -webkit-text-fill-color: transparent;
+                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                transform: skew(10deg);
+                display: inline-block;
+                height: 60px;
+                width: 120px;
+            } */
+    
+            .navbar button {
+                background-color: white;
+                border-radius: 10px;
+                color: black;
+                border: 2px solid black;
+                padding: 5px;
+                width:auto;
+                margin-left: 30px;
+                margin-right: 30px;;
+                cursor: pointer;
+            }
+    
+            .navbar button:hover {
+                background-color: black;
+                color: white;
+            }
+    </style>
+</head>
+
+<body>
+    <nav class="navigation">
+        <!--logo-------->
+        <a href="./index.html" class="logo">
+            <div class="logo">Grocery 24/7</div>
+        </a>
+
+        <!--menu-btn---->
+        <input type="checkbox" class="menu-btn" id="menu-btn">
+        <label for="menu-btn" class="menu-icon">
+            <span class="nav-icon"></span>
+        </label>
+
+        <!--menu-------->
+        <div class="menu">
+            <a href="index.html" class="active">Home</a>
+            <div class="dropdown">
+                <a href="#category" class="dropdown-toggle">Categories</a>
+                <ul class="dropdown-menu">
+                    <li><a href="./Fruits and Vegetables.html">Fruits and Vegetables</a></li>
+                    <li><a href="./Dairy Products.html">Dairy Products</a></li>
+                    <li><a href="./Kitchen and Refinery.html">Kitchen and Refinery</a></li>
+                    <li><a href="./Meat and Seafood.html">Meat and Seafood</a></li>
+                    <li><a href="./Bakery and Bread.html">Bakery and Bread</a></li>
+                </ul>
+            </div>
+            <a href="#footer">Contact&nbsp;Us</a>
+            <a href="#review">Review</a>
+            <a href="#footer">About&nbsp;Us</a>
+            <a href="Login And Registration HTML.html">Sign&nbsp;Up</a>
+        </div>
+
+        <!--right-nav-(cart-like)-->
+        <div class="right-nav">
+            <a href="./cart.html" class="cart">
+                <i class="fas fa-shopping-cart"></i>
+            </a>
+            <a href="./profile.php" class="user-profile">
+                <i class="fas fa-user"></i>
+            </a>
+        </div>
+    </nav>
+
+    <style>
+        .menu {
+            display: flex;
+            gap: 30px; /* Add gap between menu items */
+        }
+
+        .menu a {
+            text-decoration: none;
+            color: #3b3b3b;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            transition: all ease 0.3s;
+        }
+
+        .menu a:hover {
+            color: #40aa54;
+        }
+
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown-toggle {
+            cursor: pointer;
+        }
+
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: #ffffff;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            list-style: none;
+            padding: 0px 0px;
+            margin: 0;
+            z-index: 1000;
+        }
+
+        .dropdown-menu li {
+            padding: 5px 5px;
+        }
+
+        .dropdown-menu li a {
+            text-decoration: none;
+            color: #333;
+            display: block;
+        }
+
+        .dropdown-menu li a:hover {
+            background-color: #f1f1f1;
+        }
+
+        .dropdown:hover .dropdown-menu {
+            display: block;
+        }
+
+        .search-bar {
+            display:block;
+            align-items: center;
+            gap: 5px;
+            background-color: #f1f1f1;
+            border: 1px solid #ccc;
+            border-radius: 15px;
+            padding: 3px 8px;
+            width: 10px; /* Reduced width */
+        }
+
+        .search-bar input {
+            border: none;
+            outline: none;
+            background: none;
+            position:absolute;
+            font-size: 12px;
+            flex: 1;
+        }
+
+        .search-bar .mic-icon {
+            cursor: pointer;
+            color: #333;
+            position:static;
+            margin-top: 10px;
+            margin-left: 370px;
+            font-size: 14px; /* Adjusted size */
+        }
+
+        .search-bar .mic-icon:hover {
+            color: #40aa54;
+        }
+
+        @media (min-width: 992px) {
+            .menu {
+                display: flex;
+                justify-content: center; /* Center the menu items */
+                gap: 60px; /* Increase gap for larger screens */
+            }
+        }
+    </style>
+
+    <div>
+        <h1 style="margin-top: 70px;">Categories</h1>
+    </div>
+
+    <div class="container"
+        style="margin: auto; text-align: center; display: flex; flex-wrap: wrap; justify-content: center; gap: 20px;">
+    </div>
+    <div class="row" style="margin-top: 10px; margin-left: 90px; margin-right: 0px; width: max-content;">
+        <div class="col-lg-2 col-md-4 col-sm-6">
+            <div class="card">
+                <div class="card-header" style="font-size: larger;">
+                    Fruits and Vegetables
+                </div>
+                <img src="https://www.lalpathlabs.com/blog/wp-content/uploads/2019/01/Fruits-and-Vegetables.jpg"
+                    class="card-img-top img-thumbnail" style="height: 200px; width:250px;" />
+                <div class="card-footer">
+                    <a href="./Fruits and Vegetables.html">
+                        <button class="btn btn-block btn-outline-dark">
+                            Shop Now
+                        </button>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-2 col-md-4 col-sm-6">
+            <div class="card">
+                <div class="card-header" style="font-size: larger;">
+                    Dairy Products
+                </div>
+                <img src="https://welpmagazine.com/wp-content/uploads/2020/10/Dairy-products-768x572.jpg"
+                    class="card-img-top img-thumbnail" style="height: 200px; width: 250px;" />
+                <div class="card-footer">
+                    <a href="./Dairy Products.html">
+                        <button class="btn btn-block btn-outline-dark">
+                            Shop Now
+                        </button>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-2 col-md-4 col-sm-6">
+            <div class="card">
+                <div class="card-header" style="font-size: larger;">
+                    Kitchen and Refinery
+                </div>
+                <img src="https://th.bing.com/th/id/OIP.tsF10RScF-7wuHIrV6rKgwHaEG?rs=1&pid=ImgDetMain"
+                    class="card-img-top img-thumbnail" style="height: 200px; width: 250px;" />
+                <div class="card-footer">
+                    <a href="./Kitchen and Refinery.html">
+                        <button class="btn btn-block btn-outline-dark">
+                            Shop Now
+                        </button>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-2 col-md-4 col-sm-6">
+            <div class="card">
+                <div class="card-header" style="font-size: larger;">
+                    Meat and Seafood
+                </div>
+                <img src="https://th.bing.com/th/id/OIP.EVff57ignczL2IbTAamQ2gHaE8?rs=1&pid=ImgDetMain"
+                    class="card-img-top img-thumbnail" style="height: 200px; width:250px;" />
+                <div class="card-footer">
+                    <a href="./Meat and Seafood.html">
+                        <button class="btn btn-block btn-outline-dark">
+                            Shop Now
+                        </button>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-2 col-md-4 col-sm-6">
+            <div class="card">
+                <div class="card-header" style="font-size: larger;">
+                    Bakery and Bread
+                </div>
+                <img src="https://static.vecteezy.com/system/resources/previews/008/750/088/non_2x/different-bakery-breads-on-white-background-free-vector.jpg"
+                    class="card-img-top img-thumbnail" style="height: 200px; width:250px;" />
+                <div class="card-footer">
+                    <a href="./Bakery and Bread.html">
+                        <button class="btn btn-block btn-outline-dark">
+                            Shop Now
+                        </button>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <h3 style="text-align: center; color: #4CAF50;margin-top: 30px;margin-bottom: 20px; font-size: 2.5rem; font-weight: bold;"  id="h3"> Our Features </h3>
+    <!-- Carousel Container -->
+<div class="swiper mySwiper">
+    <div class="swiper-wrapper">
+        <!-- Add all 5 images -->
+        <div class="swiper-slide"><img src="https://tse1.mm.bing.net/th?id=OIG4.DzaS6A0R13efRCEhLUWC&pid=ImgGn" alt="Image 1" /></div>
+        <div class="swiper-slide"><img src="https://cdn.openart.ai/uploads/image_KHGXTXgC_1745147956355_raw.jpg" alt="Image 2" /></div>
+        <div class="swiper-slide"><img src="https://tse1.mm.bing.net/th?id=OIG4.RW0JrHw_zZItpHQk80el&pid=ImgGn" alt="Image 3" /></div>
+        <div class="swiper-slide"><img src="https://tse4.mm.bing.net/th?id=OIG1.fyLPIj0RAg4ttOsq9sTH&pid=ImgGn" alt="Image 4" /></div>
+        <div class="swiper-slide"><img src="https://img.artiz.ai/ai/20250420/6804e4bb34f4a.jpg" alt="Image 5" /></div>
+    </div>
+
+    <!-- Navigation Arrows -->
+    <div class="swiper-button-next"></div>
+    <div class="swiper-button-prev"></div>
+</div>
+
+  <style>
+    .swiper {
+        width: 80%;
+        height: 300px;
+        margin: 0 auto; /* Center the carousel */
+        position: relative;
+        display: flex;
+        align-items: center;
+    }
+
+    .swiper-wrapper {
+        display: flex;
+    }
+
+    .swiper-slide {
+        background-position: center;
+        background-size: cover;
+        width: 300px;
+        height: 300px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transition: transform 0.5s ease, box-shadow 0.5s ease;
+        transform: scale(0.8);
+    }
+
+    .swiper-slide img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 20px;
+    }
+
+    .swiper-slide-active {
+        transform: scale(5.8);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .swiper-button-next, .swiper-button-prev {
+        color: #000;
+        font-size: 30px;
+        position: absolute;
+        top: 60%;
+        transform: translateY(-50%);
+        z-index: 10;
+    }
+
+    .swiper-button-next {
+        right: 10px;
+    }
+
+    .swiper-button-prev {
+        left: 10px;
+    }
+    </style>
+
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+<script>
+    var swiper = new Swiper(".mySwiper", {
+        slidesPerView: 3,
+        centeredSlides: true,
+        loop: true,
+        spaceBetween: 30,
+        autoplay: {
+            delay: 3000,
+            disableOnInteraction: false,
+        },
+        navigation: {
+            nextEl: ".swiper-button-next",
+            prevEl: ".swiper-button-prev",
+        },
+    });
+</script>
+  
+  
+    <style>
+        .navbar {
+            display: flex;
+            align-items: center;
+            justify-content: baseline;
+            background-color: #d8fce5;
+            padding: 5px;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        /* .navbar .logo {
+            font-size: 22px;
+            font-weight: bold;
+            background: linear-gradient(240deg, green, orange);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            transform: skew(10deg);
+            display: inline-block;
+            height: 60px;
+            width: 120px;
+            padding-left: 10px;
+        } */
+
+        .navbar button {
+            background-color: white;
+            border-radius: 10px;
+            color: black;
+            border: 2px solid black;
+            padding: 5px;
+            width: auto;
+            margin-left: 30px;
+            margin-right: 30px;
+            cursor: pointer;
+        }
+
+        .navbar button:hover {
+            background-color: black;
+            color: white;
+        }
+
+        .search-bar {
+            position: center;
+            right: 100px;
+            top: 25px;
+            bottom: 25px;
+            border: 2px solid #333;
+            border-radius: 20px;
+            height: 30px;
+            width: 400px;
+            margin-left: 10px;
+            margin-right: 10px;
+            display: inline-block;
+        }
+    </style>
+
+    <script>
+        function toggleSearchBar() {
+            const searchBar = document.getElementById('searchBar');
+            if (searchBar.style.display === 'none' || searchBar.style.display === '') {
+                searchBar.style.display = 'block';
+            } else {
+                searchBar.style.display = 'none';
+            }
+        }
+    </script>
+
+
+    <!-- Pop-up Message (this will appear in the top-right corner) -->
+    <div id="popup" class="popup hidden">
+        <p id="popupMessage"></p>
+    </div>
+
+    <main>
+        <!-- Cart Section -->
+        <section id="cartSection" class="section hidden">
+            <h2>Your Cart</h2>
+            <ul id="cartItems"></ul>
+            <p>Total Price: ₹<span id="totalPrice">0.00</span></p>
+            <div id="paymentMethodsSection"></div>
+            <button onclick="window.location.href='./COD.html'">COD</button>
+            <button onclick="window.location.href='./Payment.html'">Credit Card</button>
+            <button onclick="window.location.href='./Paypal.html'">PayPal</button>
+            </div>
+
+            </form>
+        </section>
+        </div>
+    </main>
+    <script>
+
+
+
+        // Function to display cart items and total
+        function displayCart() {
+            const cartItemsList = document.getElementById('cartItems');
+            const totalPriceElement = document.getElementById('totalPrice');
+            cartItemsList.innerHTML = ''; // Clear existing items
+
+            let total = 0;
+            cartItems.forEach(item => {
+                const li = document.createElement('li');
+                li.textContent = `${item.name} - ₹${item.price}`;
+                cartItemsList.appendChild(li);
+                total += item.price;
+            });
+
+            totalPriceElement.textContent = total;
+        }
+
+    </script>
+    <script>
+        const micIcon = document.querySelector('.mic-icon');
+        const searchInput = document.getElementById('searchInput');
+
+        if ('webkitSpeechRecognition' in window) {
+            const recognition = new webkitSpeechRecognition();
+            recognition.continuous = false;
+            recognition.lang = 'en-US';
+            recognition.interimResults = false;
+            recognition.maxAlternatives = 1;
+
+            micIcon.addEventListener('click', () => {
+                recognition.start();
+                micIcon.style.color = 'red'; // visual cue
+            });
+
+            recognition.onresult = function (event) {
+                const transcript = event.results[0][0].transcript;
+                searchInput.value = transcript;
+                recognition.stop();
+                micIcon.style.color = '#555';
+            };
+
+            recognition.onerror = function (event) {
+                console.error('Speech recognition error:', event.error);
+                recognition.stop();
+                micIcon.style.color = '#555';
+            };
+        } else {
+            alert("Sorry, your browser doesn't support voice recognition.");
+        }
+    </script>
+    </br>
+    </br>
+    
+    <section style="background: #fff; color: #333; padding:20px; margin-top: 10px; margin-bottom: 40px; margin-left: 40px; margin-right: 40px; border-radius: 20px;"  id="review">
+        <div style="max-width: 1200px; margin: auto;">
+            <div style="display: flex; flex-wrap: wrap; justify-content: space-between;">
+    
+                <!-- Other footer sections like About Us, Contact Us, etc. -->
+    
+                <!-- Customer Reviews Section -->
+                <div style="flex: 1 1 300px; margin: 20px;">
+                    <h3 style="border-bottom: 2px solid #fff; padding-bottom: 10px; font-size: 40px;">Customer Reviews <i class="fas fa-shopping-cart" style="font-size: 30px; color: #4CAF50; margin-left: 0px; margin-bottom: 4px;"></i></h3>
+    
+                    <div style="margin-top: 20px;">
+                        <!-- Review 1 -->
+                        <div style="margin-top: 20px;">
+                            <!-- Review 1 -->
+                            <div style="display: flex; margin-bottom: 15px;">
+                                <img src="https://randomuser.me/api/portraits/women/65.jpg" alt="User1" style="width:60px; height:60px; border-radius:50%; margin-right:10px;">
+                                <div>
+                                    <strong style="font-size: 20px;">Ritika Sharma</strong><br>
+                                    <span style="color: #FFD700;">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                    </span>
+                                    <p style="margin: 5px 0; font-size: 15px;">"Always fresh groceries and fast delivery. Highly recommended!"</p>
+                                </div>
+                            </div>
+        
+                            <!-- Review 2 -->
+                            <div style="display: flex; margin-bottom: 15px;">
+                                <img src="https://randomuser.me/api/portraits/men/44.jpg" alt="User2" style="width:60px; height:60px; border-radius:50%; margin-right:10px;">
+                                <div>
+                                    <strong style="font-size: 20px;">Arjun Mehta</strong><br>
+                                    <span style="color: #FFD700;">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                    </span>
+                                    <p style="margin: 5px 0; font-size: 15px;">"Affordable prices and good quality products."</p>
+                                </div>
+                            </div>
+        
+                            <!-- Review 3 -->
+                            <div style="display: flex; margin-bottom: 15px;">
+                                <img src="https://randomuser.me/api/portraits/women/32.jpg" alt="User3" style="width:60px; height:60px; border-radius:50%; margin-right:10px;">
+                                <div>
+                                    <strong style="font-size: 20px;">Sunita Verma</strong><br>
+                                    <span style="color: #FFD700;">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                    </span>
+                                    <p style="margin: 5px 0; font-size: 15px;">"The dairy products and veggies are always so fresh."</p>
+                                </div>
+                            </div>
+    
+                    </div>
+                </div>
+    
+            </div>
+    
+            </div>
+    </section>
+    <section class="footer" style="margin-left: 40px; margin-right: 40px; border-radius: 20px; padding-left: 20px; padding-right: 20px;" id="footer" >
+
+    <div class="box-container" style="margin: 0px;">
+
+        <div class="box">
+            <h3> Grocery 24/7 <i class="fas fa-shopping-basket"></i> </h3>
+            <p>Hello my team has 3 members - Mayank Tyagi, Rishabh Singhal, Tarang Goel. We made this website for practice purpose only, We hope you all will enjoy this project.</p>
+            <div class="share">
+                <a href="https://x.com/rishabh__95?t=_byyiiNn_COoFNP6ub3fmA&s=09" class="fab fa-twitter"></a>
+                <a href="https://www.instagram.com/sanatani_mayank96?igsh=cGR4bHBrMG10a3g=" class="fab fa-instagram"></a>
+                <a href="https://www.linkedin.com/in/tarang-goel-229a69250?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" class="fab fa-linkedin"></a>
+            </div>
+        </div>
+
+        <div class="box">
+            <h3>contact info</h3>
+            <a href="tel: +91 9810361503" class="links"> <i class="fas fa-phone"></i> +91 98103 61503 </a>
+            <a href="tel: +91 8979218760" class="links"> <i class="fas fa-phone"></i> +91 89792 18760 </a>
+            <a href="tel:+91 9058091456" class="links"> <i class="fas fa-phone"></i> +91 90580 91456 </a>
+            <a href="mailto:rishabhsinghal.bca2022@imsuc.ac.in" class="links"> <i class="fas fa-envelope"></i> rishabhsinghal.bca2022@imsuc.ac.in </a>
+            <a href="https://maps.app.goo.gl/nWLXmcwEmBCNNqhYA" class="links"> <i class="fas fa-map-marker-alt"></i> Hapur, Uttar Pradesh - 245101 </a>
+        </div>
+
+        <div class="box">
+            <h3>quick links</h3>
+            <a href="./index.html" class="links"> <i class="fas fa-arrow-right"></i> home </a>
+            <a href="#h3" class="links"> <i class="fas fa-arrow-right"></i> features </a>
+            <a href="#" class="links"> <i class="fas fa-arrow-right"></i> categories </a>
+        </div>
+
+        <div class="box">
+            <h3>newsletter</h3>
+            <p>subscribe for latest updates</p>
+            <input type="email" placeholder="your email" class="email">
+            <input type="submit" value="subscribe" class="btn">
+            <script>
+                document.querySelector('input[type="submit"].btn').addEventListener('click', function (event) {
+                    event.preventDefault(); // Prevent form submission
+                    const emailInput = document.querySelector('.email').value.trim();
+                    if (!emailInput) {
+                        alert('Please enter your email first.');
+                    } else {
+                        alert('Thanks for subscribing to Grocery 24/7. You will get the latest notifications.');
+                    }
+                });
+            </script>
+        </div>
+
+    </div>
+
+    <div class="credit"> created by <span> MRT Web Developers </span> | all rights reserved </div>
+
+</section>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;500;600&display=swap');
+
+:root{
+    --orange:#4CAF50;
+    --black:#130f40;
+    --light-color:#666;
+    --box-shadow:0 .5rem 1.5rem rgba(0,0,0,.1);
+    --border:.2rem solid rgba(0,0,0,.1);
+    --outline:.1rem solid rgba(0,0,0,.1);
+    --outline-hover:.2rem solid var(--black);
+}
+
+*{
+    font-family: 'Poppins', sans-serif;
+    margin:0; padding:0;
+    box-sizing: border-box;
+    outline: none; border:none;
+    text-decoration: none;
+    text-transform: capitalize;
+    transition: all .2s linear;
+}
+
+html{
+    font-size: 62.5%;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+    scroll-padding-top: 7rem;
+}
+
+body{
+    background:#eee;
+}
+
+section{
+    padding:2rem 9%;
+}
+
+.heading{
+    text-align: center;
+    padding:2rem 0;
+    padding-bottom: 3rem;
+    font-size: 3.5rem;
+    color:var(--black);
+}
+
+.heading span{
+    background: var(--orange);
+    color:#fff;
+    display: inline-block;
+    padding:.5rem 3rem;
+    clip-path: polygon(100% 0, 93% 50%, 100% 99%, 0% 100%, 7% 50%, 0% 0%);
+}
+
+.btn{
+    margin-top: 1rem;
+    display: inline-block;
+    padding:.8rem 3rem;
+    font-size: 1.7rem;
+    border-radius: .5rem;
+    border:.2rem solid var(--black);
+    color:var(--black);
+    cursor: pointer;
+    background: none;
+}
+
+.btn:hover{
+    background: var(--orange);
+    color:#fff;
+}
+
+.header{
+    position: fixed;
+    top:0; left:0; right: 0;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding:2rem 9%;
+    background:#fff;
+    box-shadow: var(--box-shadow);
+}
+
+/* .header .logo{
+    font-size: 2.5rem;
+    font-weight: bolder;
+    color:var(--black);
+}
+
+.header .logo i{
+    color:var(--orange);
+} */
+
+.header .navbar a{
+    font-size: 1.7rem;
+    margin:0 1rem;
+    color:var(--black);
+}
+
+.header .navbar a:hover{
+    color:var(--orange);
+}
+
+.header .icons div{
+    height: 4.5rem;
+    width: 4.5rem;
+    line-height: 4.5rem;
+    border-radius: .5rem;
+    background: #eee;
+    color:var(--black);
+    font-size: 2rem;
+    margin-left: .3rem;
+    cursor: pointer;
+    text-align: center;
+}
+
+.header .icons div:hover{
+    background: var(--orange);
+    color:#fff;
+}
+
+#menu-btn{
+    display: none;
+}
+
+.header .search-form{
+    position: absolute;
+    top:110%; right:-110%;
+    width: 50rem;
+    height:5rem;
+    background: #fff;
+    border-radius: .5rem;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    box-shadow: var(--box-shadow);
+}
+
+.header .search-form.active{
+    right:2rem;
+    transition: .4s linear;
+}
+
+.header .search-form input{
+    height:100%;
+    width:100%;
+    background: none;
+    text-transform: none;
+    font-size: 1.6rem;
+    color:var(--black);
+    padding:0 1.5rem;
+}
+
+.header .search-form label{
+    font-size: 2.2rem;
+    padding-right: 1.5rem;
+    color:var(--black);
+    cursor: pointer;
+}
+
+.header .search-form label:hover{
+    color:var(--orange);
+}
+
+.header .shopping-cart{
+    position: absolute;
+    top:110%; right:-110%;
+    padding:1rem;
+    border-radius: .5rem;
+    box-shadow: var(--box-shadow);
+    width:35rem;
+    background: #fff;
+}
+
+.header .shopping-cart.active{
+    right:2rem;
+    transition: .4s linear;
+}
+
+.header .shopping-cart .box{
+    display: flex;
+    align-items: center;
+    gap:1rem;
+    position: relative;
+    margin:1rem 0;
+}
+
+.header .shopping-cart .box img{
+    height:10rem;
+}
+
+.header .shopping-cart .box .fa-trash{
+    font-size: 2rem;
+    position: absolute;
+    top:50%; right:2rem;
+    cursor: pointer;
+    color:var(--light-color);
+    transform: translateY(-50%);
+}
+
+.header .shopping-cart .box .fa-trash:hover{
+    color:var(--orange);
+}
+
+.header .shopping-cart .box .content h3{
+    color:var(--black);
+    font-size: 1.7rem;
+    padding-bottom: 1rem;
+}
+
+.header .shopping-cart .box .content span{
+    color:var(--light-color);
+    font-size: 1.6rem;
+}
+
+.header .shopping-cart .box .content .quantity{
+    padding-left: 1rem;
+}
+
+.header .shopping-cart .total{
+    font-size: 2.5rem;
+    padding:1rem 0;
+    text-align: center;
+    color:var(--black);
+}
+
+.header .shopping-cart .btn{
+    display: block;
+    text-align: center;
+    margin:1rem;
+}
+
+.header .login-form{
+    position: absolute;
+    top:110%; right:-110%;
+    width:35rem;
+    box-shadow: var(--box-shadow);
+    padding:2rem;
+    border-radius: .5rem;
+    background: #fff;
+    text-align: center;
+}
+
+.header .login-form.active{
+    right:2rem;
+    transition: .4s linear;
+}
+
+.header .login-form h3{
+    font-size: 2.5rem;
+    text-transform: uppercase;
+    color: var(--black);
+}
+
+.header .login-form .box{
+    width: 100%;
+    margin:.7rem 0;
+    background:#eee;
+    border-radius: .5rem;
+    padding:1rem;
+    font-size: 1.6rem;
+    color:var(--black);
+    text-transform: none;
+}
+
+.header .login-form p{
+    font-size: 1.4rem;
+    padding:.5rem 0;
+    color:var(--light-color);
+}
+
+.header .login-form p a{
+    color:var(--orange);
+    text-decoration: underline;
+}
+
+.home{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: url(../image/banner-bg.webp) no-repeat;
+    background-position: center;
+    background-size: cover;
+    padding-top: 17rem;
+    padding-bottom: 10rem;
+}
+
+.home .content{
+    text-align: center;
+    width:60rem;
+}
+
+.home .content h3{
+    color:var(--black);
+    font-size: 3rem;
+}
+
+.home .content h3 span{
+    color:var(--orange);
+}
+
+.home .content p{
+    color:var(--light-color);
+    font-size: 1.7rem;
+    padding:1rem 0;
+    line-height: 1.8;
+}
+
+.features .box-container{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
+    gap:1.5rem;
+}
+
+.features .box-container .box{
+    padding:3rem 2rem;
+    background: #fff;
+    outline: var(--outline);
+    outline-offset: -1rem;
+    text-align: center;
+    box-shadow: var(--box-shadow);
+}
+
+.features .box-container .box:hover{
+    outline: var(--outline-hover);
+    outline-offset: 0rem;
+}
+
+.features .box-container .box img{
+    margin:1rem 0;
+    height: 15rem;
+}
+
+.features .box-container .box h3{
+    font-size: 2.5rem;
+    line-height: 1.8;
+    color:var(--black);
+}
+
+.features .box-container .box p{
+    font-size: 1.5rem;
+    line-height: 1.8;
+    color:var(--light-color);
+    padding:1rem 0;
+}
+
+.products .product-slider{
+    padding:1rem;
+}
+
+.products .product-slider:first-child{
+    margin-bottom: 2rem;
+}
+
+.products .product-slider .box{
+    background: #fff;
+    border-radius: .5rem;
+    text-align: center;
+    padding:3rem 2rem;
+    outline-offset: -1rem;
+    outline: var(--outline);
+    box-shadow: var(--box-shadow);
+    transition: .2s linear;
+}
+
+.products .product-slider .box:hover{
+    outline-offset: 0rem;
+    outline: var(--outline-hover);
+}
+
+.products .product-slider .box img{
+    height:20rem;
+}
+
+.products .product-slider .box h3{
+    font-size: 2.5rem;
+    color:var(--black);
+}
+
+.products .product-slider .box .price{
+    font-size: 2rem;
+    color:var(--light-color);
+    padding:.5rem 0;
+}
+
+.products .product-slider .box .stars i{
+    font-size: 1.7rem;
+    color:var(--orange);
+    padding:.5rem 0;
+}
+
+.categories .box-container{
+    display: grid;
+    grid-template-columns: repeat(absolute, minmax(26rem, 1fr));
+    gap:1.5rem;
+}
+
+.categories .box-container .box{
+    padding:3rem 2rem;
+    border-radius: .5rem;
+    background:#fff;
+    box-shadow: var(--box-shadow);
+    outline:var(--outline);
+    outline-offset: -1rem;
+    text-align: center;
+}
+
+.categories .box-container .box:hover{
+    outline:var(--outline-hover);
+    outline-offset: 0rem;
+}
+
+.categories .box-container .box img{
+    margin:1rem 0;
+    height:15rem;
+}
+
+.categories .box-container .box h3{
+   font-size: 2rem;
+   color:var(--black);
+   line-height: 1.8;
+}
+
+.categories .box-container .box p{
+    font-size: 1.7rem;
+    color:var(--light-color);
+    line-height: 1.8;
+    padding:1rem 0;
+}
+
+.review .review-slider{
+    padding:1rem;
+}
+
+.review .review-slider .box{
+    background: #fff;
+    border-radius: .5rem;
+    text-align: center;
+    padding:3rem 2rem;
+    outline-offset: -1rem;
+    outline: var(--outline);
+    box-shadow: var(--box-shadow);
+    transition: .2s linear;
+}
+
+.review .review-slider .box:hover{
+    outline:var(--outline-hover);
+    outline-offset: 0rem;
+}
+
+.review .review-slider .box img{
+    height:10rem;
+    width:10rem;
+    border-radius: 50%;
+}
+
+.review .review-slider .box p{
+    padding:1rem 0;
+    line-height: 1.8;
+    color:var(--light-color);
+    font-size: 1.5rem;
+}
+
+.review .review-slider .box h3{
+    padding-bottom: .5rem;
+    color:var(--black);
+    font-size: 2.2rem;
+}
+
+.review .review-slider .box .stars i{
+    color:var(--orange);
+    font-size: 1.7rem;
+}
+
+.blogs .box-container{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
+    gap:1.5rem;
+}
+
+.blogs .box-container .box{
+    overflow: hidden;
+    border-radius: .5rem;
+    box-shadow: var(--box-shadow);
+    background:#fff;
+}
+
+.blogs .box-container .box img{
+    height:25rem;
+    width:100%;
+    object-fit: cover;
+}
+
+.blogs .box-container .box .content{
+    padding:2rem;
+}
+
+.blogs .box-container .box .content .icons{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 1.5rem;
+    margin-bottom: 1rem;
+    border-bottom: var(--border);
+}
+
+.blogs .box-container .box .content .icons a{
+    color:var(--light-color);
+    font-size: 1.5rem;
+}
+
+.blogs .box-container .box .content .icons a:hover{
+    color:var(--black);
+}
+
+.blogs .box-container .box .content .icons a i{
+    color:var(--orange);
+    padding-right: .5rem;
+}
+
+.blogs .box-container .box .content h3{
+    line-height: 1.8;
+    color:var(--black);
+    font-size: 2.2rem;
+    padding:.5rem 0;
+}
+
+.blogs .box-container .box .content p{
+    line-height: 1.8;
+    color:var(--light-color);
+    font-size: 1.5rem;
+    padding:.5rem 0;
+}
+
+.footer{
+    background: #fff;
+}
+
+.footer .box-container{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr));
+    gap:1rem;
+}
+
+.footer .box-container .box h3{
+    font-size: 2.5rem;
+    color:var(--black);
+    padding:1rem 0;
+}
+
+.footer .box-container .box h3 i{
+    color:var(--orange);
+}
+
+.footer .box-container .box .links{
+    display: block;
+    font-size: 1.5rem;
+    color:var(--light-color);
+    padding:1rem 0;
+}
+
+.footer .box-container .box .links i{
+    color:var(--orange);
+    padding-right: .5rem;
+}
+
+.footer .box-container .box .links:hover i{
+    padding-right: 2rem;
+}
+
+
+.footer .box-container .box p{
+    line-height: 1.8;
+    font-size: 1.5rem;
+    color:var(--light-color);
+    padding:1rem 0;
+}
+
+.footer .box-container .box .share a{
+    height:4rem;
+    width:4rem;
+    line-height:4rem;
+    border-radius: .5rem;
+    font-size: 2rem;
+    color:var(--black);
+    margin-right: .2rem;
+    background: #eee;
+    text-align: center;
+}
+
+.footer .box-container .box .share a:hover{
+    background: var(--orange);
+    color: #fff;
+}
+
+.footer .box-container .box .email{
+    width: 100%;
+    margin:.7rem 0;
+    padding:1rem;
+    border-radius: .5rem;
+    background: #eee;
+    font-size: 1.6rem;
+    color:var(--black);
+    text-transform: none;
+}
+
+.footer .box-container .box .payment-img{
+    margin-top: 2rem;
+    height: 3rem;
+    display: block;
+}
+
+.footer .credit{
+    text-align: center;
+    margin-top: 2rem;
+    padding:1rem;
+    padding-top: 2.5rem;
+    font-size: 2rem;
+    color:var(--black);
+    border-top: var(--border);
+}
+
+.footer .credit span{
+    color:var(--orange);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+/* media queries  */
+
+@media (max-width:991px){
+
+    html{
+        font-size: 55%;
+    }
+
+    .header{
+        padding:2rem;
+    }
+
+    section{
+        padding:2rem;
+    }
+
+}
+
+@media (max-width:768px){
+
+    #menu-btn{
+        display: inline-block;
+    }
+
+    .header .search-form{
+        width:90%;
+    }
+
+    .header .navbar{
+        position: absolute;
+        top:110%; right:-110%;
+        width:30rem;
+        box-shadow: var(--box-shadow);
+        border-radius: .5rem;
+        background: #fff;
+    }
+
+    .header .navbar.active{
+        right:2rem;
+        transition: .4s linear;
+    }
+
+    .header .navbar a{
+        font-size: 2rem;
+        margin:2rem 2.5rem;
+        display: block;
+    }
+
+}
+
+@media (max-width:450px){
+
+    html{
+        font-size: 50%;
+    }
+
+    .heading{
+        font-size: 2.5rem;
+    }
+
+    .footer{
+        text-align: center;
+    }
+
+    .footer .box-container .box .payment-img{
+        margin: 2rem auto;
+    }
+
+}
+</style>
+    <script src="script.js"></script>
+</body>
+
+</html>

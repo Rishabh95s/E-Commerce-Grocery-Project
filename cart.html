@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+    <title>
+
+        Shopping Cart
+
+    </title>
+
+    <link rel="stylesheet" type="text/css" href="Cart.css">
+
+    <script src="https://kit.fontawesome.com/9088cc6401.js" crossorigin="anonymous"></script>
+
+    <script>
+        // Example product add function (customize as per your code)
+        function addToCart(name, price, quantity, image) {
+            let cart = JSON.parse(localStorage.getItem("cart")) || [];
+        
+            // Check if product already exists
+            const existing = cart.find(p => p.name === name);
+            if (existing) {
+                existing.quantity += quantity;
+            } else {
+                cart.push({ name, price, quantity, image });
+            }
+        
+            localStorage.setItem("cart", JSON.stringify(cart));
+        }
+        </script>
+        
+</head>
+
+<link rel="shortcut icon" type="image/jpg"
+    href="C:\Users\hp\Desktop\College\First Semester\Introduction To Web Technologies\Notepad ++ Files\Project\favicon.ico" />
+
+<body>
+
+    <div class="container">
+
+        <h1>
+
+            Shopping Cart
+
+        </h1>
+
+        <div class="products" id="cart-products" style="max-height: 400px; overflow-y: auto; display: inline-block;">
+            <!-- Products will be dynamically added here -->
+        </div>
+        <div class="cart-total">
+            <p>
+            <div>Total Price</div>
+            <div id="total-price">Rs. 0</div>
+            </p>
+            <p>
+            <div>No. of Items</div>
+            <div id="total-items">0</div>
+            </p>
+            <a href="./bill.html" style="height: 60px;" onclick="proceedToCheckout(event)">Proceed to Checkout</a>
+        </div>
+        <script>
+            // Example of adding a product to cart
+            function addToCart(product) {
+                let cart = JSON.parse(localStorage.getItem("cart")) || [];
+                cart.push(product); // product = { name, price, quantity, image }
+                localStorage.setItem("cart", JSON.stringify(cart));
+            }
+
+            document.addEventListener("DOMContentLoaded", function () {
+                const cartProducts = document.getElementById('cart-products');
+                const totalPriceElement = document.getElementById('total-price');
+                const totalItemsElement = document.getElementById('total-items');
+
+                // Retrieve cart items from localStorage
+                let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+                function renderCart() {
+                    cartProducts.innerHTML = '';
+                    let totalPrice = 0;
+                    let totalItems = 0;
+
+                    cart.forEach((product, index) => {
+                        totalPrice += parseInt(product.price.replace('Rs. ', '')) * product.quantity;
+                        totalItems += product.quantity;
+
+                        const productHTML = `
+                                <div class="product">
+                                    <img src="${product.image}" alt="${product.name}">
+                                    <div class="product-info">
+                                        <h3 class="product-name">${product.name}</h3>
+                                        <h4 class="product-price">Rs. ${parseInt(product.price.replace('Rs. ', '')) * product.quantity}</h4>
+                                        <div class="product-quantity">
+                                            <button class="decrease-btn" onclick="updateQuantity(${index}, -1)">-</button>
+                                            <span>${product.quantity}</span>
+                                            <button class="increase-btn" onclick="updateQuantity(${index}, 1)">+</button>
+                                        </div>
+                                        <button class="remove-btn" onclick="removeFromCart(${index})">Remove</button>
+                                    </div>
+                                </div>
+                            `;
+                        cartProducts.insertAdjacentHTML('beforeend', productHTML);
+                    });
+
+                    totalPriceElement.textContent = `Rs. ${totalPrice}`;
+                    totalItemsElement.textContent = totalItems;
+                }
+
+                function updateQuantity(index, change) {
+                    if (cart[index].quantity + change > 0) {
+                        cart[index].quantity += change;
+                        localStorage.setItem('cart', JSON.stringify(cart));
+                        renderCart();
+                    }
+                }
+
+                function removeFromCart(index) {
+                    cart.splice(index, 1);
+                    localStorage.setItem('cart', JSON.stringify(cart));
+                    renderCart();
+                }
+
+                function clearCart() {
+                    localStorage.removeItem('cart');
+                    cart = [];
+                    renderCart();
+                }
+
+                function proceedToCheckout(event) {
+                    const cart = JSON.parse(localStorage.getItem("cart")) || [];
+                    if (cart.length === 0) {
+                        event.preventDefault();
+                        alert("The cart is empty. Please add products before proceeding to checkout.");
+                    }
+                }
+
+              
+                // Expose functions to the global scope
+                window.updateQuantity = updateQuantity;
+                window.removeFromCart = removeFromCart;
+                window.clearCart = clearCart;
+                window.proceedToCheckout = proceedToCheckout;
+
+                renderCart();
+            });
+        </script>
+        <style>
+            html,
+            body {
+                height: 100%;
+                margin: 0;
+                overflow-y: auto;
+                /* Allow scrolling for the entire page */
+            }
+
+            .container {
+                min-height: 100%;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                padding: 20px;
+                box-sizing: border-box;
+            }
+
+            .products {
+                max-height: 400px;
+                width: 1000px;
+                overflow-y: auto;
+                /* Keep the products list scrollable */
+            }
+
+            .products {
+                display: inline-block;
+                flex-direction: column;
+                gap: 10px;
+                align-items: baseline;
+            }
+
+            .product {
+                display: flex;
+                align-items: center;
+                gap: 20px;
+                border: 1px solid #ccc;
+                padding: 10px;
+                border-radius: 5px;
+            }
+
+            .product img {
+                width: 100px;
+                height: 100px;
+                object-fit: cover;
+            }
+
+            .product-info {
+                flex: auto;
+            }
+
+            .product-quantity {
+                display: flex;
+                align-items: center;
+                gap: 10px;
+            }
+
+            .product-quantity button {
+                width: 30px;
+                height: 30px;
+                border: none;
+                background-color: #ddd;
+                cursor: pointer;
+                border-radius: 5px;
+            }
+
+            .product-quantity button:hover {
+                background-color: #bbb;
+            }
+
+            .remove-btn {
+                background-color: red;
+                color: white;
+                border: none;
+                padding: 5px 10px;
+                border-radius: 5px;
+                cursor: pointer;
+            }
+
+            .remove-btn:hover {
+                background-color: darkred;
+            }
+
+            .cart-total {
+                margin-top: 20px;
+                padding: 10px;
+                border: 1px solid #ccc;
+                border-radius: 5px;
+                width: 1100px;
+            }
+
+            .cart-total p {
+                display: flex;
+                justify-content: space-between;
+                margin: 5px 0;
+            }
+
+            .cart-total a {
+                display: inline-block;
+                margin-top: 10px;
+                padding: 10px 20px;
+                background-color: green;
+                color: white;
+                text-decoration: none;
+                border-radius: 5px;
+                text-align: center;
+            }
+
+            .cart-total a:hover {
+                background-color: darkgreen;
+            }
+
+            @media (max-width: 768px) {
+                .product {
+                    flex-direction: column;
+                    align-items: flex-start;
+                }
+
+                .product img {
+                    width: 80px;
+                    height: 80px;
+                }
+
+                .product-quantity {
+                    justify-content: flex-start;
+                }
+            }
+        </style>
+    </div>
+</body>
+
+</html>
